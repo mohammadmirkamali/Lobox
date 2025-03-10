@@ -1,0 +1,84 @@
+.select {
+    font-size: 20px;
+    width: 300px;
+    border: 1px solid blue; 
+    padding: 16px 32px 16px 16px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+  
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 255, 0.25);
+    }
+  
+    &::before {
+      content: '⌵'; 
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-60%);
+      font-size: 24px;
+    }
+  
+    &.open {
+      box-shadow: 0 0 10px rgba(0, 0, 255, 0.25);
+  
+      &::before {
+        transform: translateY(-30%) rotate(180deg); 
+      }
+    }
+  }
+
+  .option-container {
+    border: 1px solid rgb(220, 220, 220); 
+    border-radius: 16px;
+    margin: 8px 0;
+    padding: 12px;
+    display: none;
+    box-shadow: 0 0 10px rgba(220, 220, 220, 0.5);
+    position: relative;
+  
+    &.open {
+      display: block;
+    }
+  
+    .options-wrapper {
+      max-height: 270px;
+      overflow: auto;
+    }
+  
+    .option {
+      position: relative;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 4px;
+      cursor: pointer;
+  
+      &.active {
+        color: blue;
+        background-color: rgba(100, 149, 237, 0.3);
+  
+        &::before {
+          content: '✓';
+          position: absolute;
+          right: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 20px;
+        }
+      }
+    }
+  
+    input {
+      border: 1px solid rgb(220, 220, 220);
+      border-radius: 16px;
+      width: 100%; 
+      padding: 12px 16px;
+      font-size: 16px;
+      margin-top: 12px;
+      box-sizing: border-box; 
+    }
+  }
