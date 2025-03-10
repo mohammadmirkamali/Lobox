@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./styles.scss";
 
 const Select: React.FC<{
@@ -11,10 +11,15 @@ const Select: React.FC<{
   const [selected, setSelected] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [openSelect, setOpenSelect] = useState(false);
+  const optionExist = useMemo(
+    () => !!options.includes(inputValue.trim()),
+    [inputValue, options]
+  );
 
   const handleAddNewItem = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (inputValue.trim()) {
+
+    if (inputValue.trim() && !optionExist) {
       const newOptions = [inputValue, ...options];
       setOptions(newOptions);
       setInputValue("");
@@ -67,9 +72,13 @@ const Select: React.FC<{
         <form onSubmit={handleAddNewItem}>
           <input
             placeholder="Enter new item"
+            className={optionExist ? "error" : ""}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
+          {optionExist && (
+            <div className="error-message">This option exist</div>
+          )}
         </form>
       </div>
     </div>
